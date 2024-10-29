@@ -1,18 +1,40 @@
-//
-//  NotesView.swift
-//  TestApp
-//
-//  Created by Bhaskara Sai Vamsi Krishna Padala on 10/28/24.
-//
-
 import SwiftUI
 
 struct NotesView: View {
+    @State private var notes: [String] = []
+    @State private var newNote: String = ""
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("Notes")
+                .font(.largeTitle)
+                .padding()
+
+            TextField("New Note", text: $newNote)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+
+            Button("Add Note") {
+                if !newNote.isEmpty {
+                    notes.append(newNote)
+                    newNote = ""
+                }
+            }
+            .padding()
+
+            List {
+                ForEach(notes, id: \.self) { note in
+                    Text(note)
+                }
+            }
+        }
+        .padding()
+        .navigationTitle("Notes")
     }
 }
 
-#Preview {
-    NotesView()
+struct NotesView_Previews: PreviewProvider {
+    static var previews: some View {
+        NotesView()
+    }
 }
