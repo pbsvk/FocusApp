@@ -3,7 +3,7 @@ import SwiftUI
 struct NotesView: View {
     @State private var notes: [String] = []
     @State private var newNote: String = ""
-
+    @State var activeView: currentView
     var body: some View {
         VStack {
             Text("Notes")
@@ -30,11 +30,12 @@ struct NotesView: View {
         }
         .padding()
         .navigationTitle("Notes")
+        .frame(width: .infinity, height: .infinity, alignment: .center)
     }
 }
 
 struct NotesView_Previews: PreviewProvider {
     static var previews: some View {
-        NotesView()
+        NotesView(activeView: .center)
     }
 }
